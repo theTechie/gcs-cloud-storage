@@ -28,6 +28,22 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>FileUploader</servlet-name>
 		<url-pattern>/fileUpload</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>FileLister</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.FileLister</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>FileLister</servlet-name>
+		<url-pattern>/fileList</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+		<servlet-name>CheckFile</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.CheckFile</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>CheckFile</servlet-name>
+		<url-pattern>/checkFile</url-pattern>
+	</servlet-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

@@ -21,10 +21,25 @@
 		<input type="submit" value="Submit">
 	</form> -->
 
+	<h2> Upload files </h2>
 	<form action="/fileUpload" method="post" enctype="multipart/form-data"> 
-		<input type="text" name="foo"> 
-		<input type="file" name="myFile" multiple> 
-		<input type="submit" value="Submit">
+		<input type="file" name="files" multiple> 
+		<input type="submit" value="Upload Files">
+	</form>
+	
+	<br/>
+	
+	<h2> List all files </h2>
+	<form action="/fileList" method="get">
+		<input type="submit" value="List Files">
+	</form>
+	
+	<br />
+	
+	<h2> Check File </h2>
+	<form action="/checkFile" method="get">
+		<input type="text" name="fileName">
+		<input type="submit" value="Check File">
 	</form>
 
 	<!--    <table>
