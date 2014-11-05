@@ -41,6 +41,14 @@
 		<input type="text" name="fileName">
 		<input type="submit" value="Check File">
 	</form>
+	
+	<br />
+	
+	<h2> Delete File </h2>
+	<form action="/deleteFile" method="get">
+		<input type="text" name="fileName">
+		<input type="submit" value="Delete File">
+	</form>
 
 	<!--    <table>
       <tr>
