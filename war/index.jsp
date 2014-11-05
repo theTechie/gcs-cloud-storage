@@ -2,7 +2,6 @@
 <%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
 <%@ page import="com.google.appengine.api.blobstore.UploadOptions" %>
 
-
 <% BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService(); %>
 <% UploadOptions uploadOptions = UploadOptions.Builder.withGoogleStorageBucketName("cs553-data-bucket");  %>
 
@@ -45,9 +44,9 @@
 	<br />
 	
 	<h2> Delete File </h2>
-	<form action="/deleteFile" method="get">
+	<form action="/removeFile" method="get">
 		<input type="text" name="fileName">
-		<input type="submit" value="Delete File">
+		<input type="submit" value="Remove File">
 	</form>
 
 	<!--    <table>

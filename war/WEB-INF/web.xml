@@ -5,22 +5,6 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Cloud_storage_app</servlet-name>
-		<servlet-class>com.iit.cloudstorageapp.Cloud_storage_appServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Cloud_storage_app</servlet-name>
-		<url-pattern>/cloud_storage_app</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>Cloud_storage_file</servlet-name>
-		<servlet-class>com.iit.cloudstorageapp.Cloud_storage_fileServlet</servlet-class>
-	</servlet>	
-	<servlet-mapping>
-		<servlet-name>Cloud_storage_file</servlet-name>
-		<url-pattern>/cloud_storage_file</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>FileUploader</servlet-name>
 		<servlet-class>com.iit.cloudstorageapp.FileUploader</servlet-class>
 	</servlet>	
@@ -45,12 +29,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/checkFile</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>DeleteFile</servlet-name>
-		<servlet-class>com.iit.cloudstorageapp.DeleteFile</servlet-class>
+		<servlet-name>RemoveFile</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.RemoveFile</servlet-class>
 	</servlet>	
 	<servlet-mapping>
-		<servlet-name>DeleteFile</servlet-name>
-		<url-pattern>/deleteFile</url-pattern>
+		<servlet-name>RemoveFile</servlet-name>
+		<url-pattern>/removeFile</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
