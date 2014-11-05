@@ -20,6 +20,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Cloud_storage_file</servlet-name>
 		<url-pattern>/cloud_storage_file</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>FileUploader</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.FileUploader</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>FileUploader</servlet-name>
+		<url-pattern>/fileUpload</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
