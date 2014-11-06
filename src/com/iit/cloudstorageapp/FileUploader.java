@@ -41,12 +41,12 @@ public class FileUploader extends HttpServlet {
 					byte[] buffer = new byte[8192];
 					while ((len = (stream.read(buffer, 0, buffer.length))) != -1) {
 						output.write(buffer, 0, len);
-
-						// Upload to GCS using GcsService
-						GoogleCloudStorageHelper.insertFile(item.getName(),
-								item.getContentType(), output.toByteArray(),
-								true);
 					}
+					
+					// Upload to GCS using GcsService
+					GoogleCloudStorageHelper.insertFile(item.getName(),
+							item.getContentType(), output.toByteArray(),
+							true);
 				}
 			}
 			res.sendRedirect("/");
