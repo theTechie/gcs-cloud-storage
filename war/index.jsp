@@ -43,6 +43,14 @@
 	
 	<br />
 	
+	<h2> Find File </h2>
+	<form action="/findFile" method="get">
+		<input type="text" name="fileName">
+		<input type="submit" value="Find File">
+	</form>
+	
+	<br />
+	
 	<h2> Delete File </h2>
 	<form action="/removeFile" method="get">
 		<input type="text" name="fileName">
