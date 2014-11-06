@@ -21,7 +21,12 @@
 	</form> -->
 
 	<h2> Upload files </h2>
-	<form action="/fileUpload" method="post" enctype="multipart/form-data"> 
+	<!-- <form action="/fileUpload" method="post" enctype="multipart/form-data"> 
+		<input type="file" name="files" multiple> 
+		<input type="submit" value="Upload Files">
+	</form> -->
+	
+	<form action="<%= blobstoreService.createUploadUrl("/blobUpload", uploadOptions) %>" method="post" enctype="multipart/form-data"> 
 		<input type="file" name="files" multiple> 
 		<input type="submit" value="Upload Files">
 	</form>
