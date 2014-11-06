@@ -36,6 +36,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>RemoveFile</servlet-name>
 		<url-pattern>/removeFile</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>FindFile</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.FindFile</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>FindFile</servlet-name>
+		<url-pattern>/findFile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BlobUploader</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.BlobUploader</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>BlobUploader</servlet-name>
+		<url-pattern>/blobUpload</url-pattern>
+	</servlet-mapping>
+	
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

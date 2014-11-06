@@ -1,12 +1,17 @@
 package com.iit.cloudstorageapp;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.appengine.tools.cloudstorage.GcsFileMetadata;
 import com.google.appengine.tools.cloudstorage.GcsFileOptions;
 import com.google.appengine.tools.cloudstorage.GcsFilename;
+import com.google.appengine.tools.cloudstorage.GcsInputChannel;
 import com.google.appengine.tools.cloudstorage.GcsOutputChannel;
 import com.google.appengine.tools.cloudstorage.GcsService;
 import com.google.appengine.tools.cloudstorage.GcsServiceFactory;
@@ -103,4 +108,47 @@ public class GoogleCloudStorageHelper {
 		}
 		return fileList;
 	}
+	
+	// Find a file
+	public static void findFile(String fileName, HttpServletResponse res){
+		byte[] buffer = new byte[8192];
+		ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+		
+		try {
+			GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
+			GcsFileMetadata gcsFileMetadata = gcsService.getMetadata(gcsFileName);
+			GcsInputChannel inputChannel = gcsService.openReadChannel(gcsFileName, 0);
+			GcsFileOptions fileOptions = gcsFileMetadata.getOptions();
+			
+			res.setContentType(fileOptions.getMimeType());
+			res.setCharacterEncoding(fileOptions.getContentEncoding());
+			res.setHeader("Content-disposition", "attachment; filename=" + fileName);
+			
+			int len;
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			while ((len = inputChannel.read(byteBuffer)) != -1) {
+				output.write(byteBuffer.array(), 0, len);
+				byteBuffer.clear();
+			}
+			
+			res.getOutputStream().write(output.toByteArray());
+			
+		} catch (Exception ex) {
+			log.warning(ex.getMessage());
+		}
+	}
+	
+	/*public static void findFile_Blob(String fileName, HttpServletResponse resp) {
+		try {
+			GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
+			GcsFileMetadata fileMetadata = gcsService.getMetadata(gcsFileName);
+			FileInfo info = 
+			BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+			BlobKey blobKey = blobstoreService.createGsBlobKey(
+			    "/gs/" + bucketName + "/" + fileName);
+			blobstoreService.serve(blobKey, resp);
+		} catch (Exception ex) {
+			log.warning(ex.getMessage());
+		}
+	}*/
 }

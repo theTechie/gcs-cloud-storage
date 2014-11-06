@@ -21,7 +21,12 @@
 	</form> -->
 
 	<h2> Upload files </h2>
-	<form action="/fileUpload" method="post" enctype="multipart/form-data"> 
+	<!-- <form action="/fileUpload" method="post" enctype="multipart/form-data"> 
+		<input type="file" name="files" multiple> 
+		<input type="submit" value="Upload Files">
+	</form> -->
+	
+	<form action="<%= blobstoreService.createUploadUrl("/blobUpload", uploadOptions) %>" method="post" enctype="multipart/form-data"> 
 		<input type="file" name="files" multiple> 
 		<input type="submit" value="Upload Files">
 	</form>
@@ -39,6 +44,14 @@
 	<form action="/checkFile" method="get">
 		<input type="text" name="fileName">
 		<input type="submit" value="Check File">
+	</form>
+	
+	<br />
+	
+	<h2> Find File </h2>
+	<form action="/findFile" method="get">
+		<input type="text" name="fileName">
+		<input type="submit" value="Find File">
 	</form>
 	
 	<br />
