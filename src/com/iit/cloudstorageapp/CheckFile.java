@@ -21,17 +21,19 @@ public class CheckFile extends HttpServlet {
 			res.setContentType("text/html");
 			res.setCharacterEncoding("UTF-8");
 
-			Boolean isExist = GoogleCloudStorageHelper.checkFile(file);
-
-			if (isExist) {
+			if (MemCacheHelper.containsKey(file)) {
 				res.getOutputStream().print(
-						"<b> File Found : " + file + " ! </b>");
-				log.info("File Found: " + file);
+						"<b> File Found in MemCache : " + file + " ! </b>");
+				log.info("File Found in MemCache: " + file);
+			} else if (GoogleCloudStorageHelper.checkFile(file)) {
+					res.getOutputStream().print(
+							"<b> File Found in GCS : " + file + " ! </b>");
+					log.info("File Found in GCS: " + file);
 			} else {
-				res.getOutputStream().print(
-						"<b> File Not Found : " + file + "</b>");
-				log.info("File Not Found: " + file);
-			}
+					res.getOutputStream().print(
+							"<b> File Not Found in MemCache nor GCS : " + file + "</b>");
+					log.info("File Not Found in MemCache nor GCS: " + file);
+			}						
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 			throw new ServletException(ex);

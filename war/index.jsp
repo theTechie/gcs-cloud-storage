@@ -14,28 +14,32 @@
 <body>
 	<h1>CS553 Distributed Storage App running on Google App Engine!</h1>
 
-	<!-- <form action="<%= blobstoreService.createUploadUrl("/cloud_storage_file", uploadOptions) %>" method="post" enctype="multipart/form-data"> 
-		<input type="text" name="foo"> 
-		<input type="file" name="myFile" multiple> 
-		<input type="submit" value="Submit">
-	</form> -->
-
 	<h2> Upload files </h2>
-	<!-- <form action="/fileUpload" method="post" enctype="multipart/form-data"> 
-		<input type="file" name="files" multiple> 
-		<input type="submit" value="Upload Files">
-	</form> -->
-	
-	<form action="<%= blobstoreService.createUploadUrl("/blobUpload", uploadOptions) %>" method="post" enctype="multipart/form-data"> 
+	<form action="/fileUpload" method="post" enctype="multipart/form-data"> 
 		<input type="file" name="files" multiple> 
 		<input type="submit" value="Upload Files">
 	</form>
+	
+	<!-- <form action="<%= blobstoreService.createUploadUrl("/blobUpload", uploadOptions) %>" method="post" enctype="multipart/form-data"> 
+		<input type="file" name="files" multiple> 
+		<input type="submit" value="Upload Files">
+	</form> -->
 	
 	<br/>
 	
 	<h2> List all files </h2>
 	<form action="/fileList" method="get">
 		<input type="submit" value="List Files">
+	</form>
+	
+	<br />
+	
+	<h2> MemCache </h2>
+	<form action="/memCacheStats" method="get">
+		<input type="submit" value="View Stats">		
+	</form>
+	<form action="/memCacheRemoveAll" method="get">
+		<input type="submit" value="Remove All MemCache">
 	</form>
 	
 	<br />
@@ -61,16 +65,11 @@
 		<input type="text" name="fileName">
 		<input type="submit" value="Remove File">
 	</form>
-
-	<!--    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-			<td><a href="cloud_storage_app">Cloud_storage_app</a></td>
-			<td><a href="cloud_storage_file">Cloud_storage_file</a></td>			
-		</tr>
-    </table> -->
+	
+	<form action="/removeAll" method="get">
+		<input type="submit" value="Remove All Files">
+	</form>
+	
 </body>
 
 </html>

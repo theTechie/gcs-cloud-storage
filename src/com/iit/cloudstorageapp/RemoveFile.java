@@ -21,13 +21,17 @@ public class RemoveFile extends HttpServlet {
 			res.setContentType("text/html");
 			res.setCharacterEncoding("UTF-8");
 
-			Boolean isExist = GoogleCloudStorageHelper.checkFile(file);
-			Boolean isDeleted = false;
-
-			if (isExist) {
+			Boolean isDeleted = false, isExist = false;
+			
+			if (MemCacheHelper.containsKey(file)) {
+				MemCacheHelper.remove(file);
+			}
+			
+			if (GoogleCloudStorageHelper.checkFile(file)) {
+				isExist = true;
 				isDeleted = GoogleCloudStorageHelper.removeFile(file);
 			}
-
+			
 			if (!isExist) {
 				res.getOutputStream().print(
 						"<b> File Not Found : " + file + "</b>");

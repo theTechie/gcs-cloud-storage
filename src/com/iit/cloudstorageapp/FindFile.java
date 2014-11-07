@@ -21,11 +21,15 @@ public class FindFile extends HttpServlet {
 			res.setContentType("text/html");
 			res.setCharacterEncoding("UTF-8");
 
-			GoogleCloudStorageHelper.findFile(file, res);
-
-			
-			//res.getOutputStream().write(bytes);
-			
+			if (MemCacheHelper.containsKey(file)) {
+				res.setHeader("Content-disposition", "attachment; filename=" + file);
+				res.setCharacterEncoding("UTF-8");
+				res.getOutputStream().write((byte[]) MemCacheHelper.get(file));
+			} else if (GoogleCloudStorageHelper.checkFile(file)){
+				GoogleCloudStorageHelper.findFile(file, res);
+			} else {
+				log.warning("File Not Found in MemCache nor GCS : " + file);
+			}
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 			throw new ServletException(ex);

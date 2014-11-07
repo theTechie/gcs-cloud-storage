@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/storage-v1r18lv1.18.0-rc"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/appengine-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/appengine-api-stubs.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/appengine-gcs-client-0.4.3.jar"/>
@@ -36,7 +37,6 @@
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/joda-time-2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/jsr305-1.3.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/transaction-api-1.1.jar"/>
-	<classpathentry exported="true" kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/storage-v1r18lv1.18.0-rc"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/commons-fileupload-1.3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/gags/Tools/deps/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>

@@ -44,6 +44,30 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>FindFile</servlet-name>
 		<url-pattern>/findFile</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>MemCacheStats</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.MemCacheStats</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>MemCacheStats</servlet-name>
+		<url-pattern>/memCacheStats</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MemCacheRemoveAll</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.MemCacheRemoveAll</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>MemCacheRemoveAll</servlet-name>
+		<url-pattern>/memCacheRemoveAll</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RemoveAll</servlet-name>
+		<servlet-class>com.iit.cloudstorageapp.RemoveAll</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>RemoveAll</servlet-name>
+		<url-pattern>/removeAll</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>BlobUploader</servlet-name>
@@ -53,8 +77,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>BlobUploader</servlet-name>
 		<url-pattern>/blobUpload</url-pattern>
 	</servlet-mapping>
-	
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

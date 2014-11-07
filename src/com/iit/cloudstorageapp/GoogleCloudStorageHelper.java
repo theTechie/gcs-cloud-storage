@@ -108,47 +108,54 @@ public class GoogleCloudStorageHelper {
 		}
 		return fileList;
 	}
-	
-	// Find a file
-	public static void findFile(String fileName, HttpServletResponse res){
+
+	// List all files in bucket
+	public static double getStorageSizeMB() {
+		double size = 0;
+
+		try {
+			ListResult listResult = gcsService.list(bucketName,
+					ListOptions.DEFAULT);
+
+			while (listResult.hasNext()) {
+				ListItem item = listResult.next();
+				size += item.getLength();
+			}
+		} catch (Exception ex) {
+			log.warning(ex.getMessage());
+		}
+		return size / 1e6;
+	}
+
+	// Find a filefileList
+	public static void findFile(String fileName, HttpServletResponse res) {
 		byte[] buffer = new byte[8192];
 		ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
-		
+
 		try {
 			GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
-			GcsFileMetadata gcsFileMetadata = gcsService.getMetadata(gcsFileName);
-			GcsInputChannel inputChannel = gcsService.openReadChannel(gcsFileName, 0);
+			GcsFileMetadata gcsFileMetadata = gcsService
+					.getMetadata(gcsFileName);
+			GcsInputChannel inputChannel = gcsService.openReadChannel(
+					gcsFileName, 0);
 			GcsFileOptions fileOptions = gcsFileMetadata.getOptions();
-			
+
 			res.setContentType(fileOptions.getMimeType());
 			res.setCharacterEncoding(fileOptions.getContentEncoding());
-			res.setHeader("Content-disposition", "attachment; filename=" + fileName);
-			
+			res.setHeader("Content-disposition", "attachment; filename="
+					+ fileName);
+
 			int len;
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			while ((len = inputChannel.read(byteBuffer)) != -1) {
 				output.write(byteBuffer.array(), 0, len);
 				byteBuffer.clear();
 			}
-			
+
 			res.getOutputStream().write(output.toByteArray());
-			
+
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 		}
 	}
-	
-	/*public static void findFile_Blob(String fileName, HttpServletResponse resp) {
-		try {
-			GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
-			GcsFileMetadata fileMetadata = gcsService.getMetadata(gcsFileName);
-			FileInfo info = 
-			BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-			BlobKey blobKey = blobstoreService.createGsBlobKey(
-			    "/gs/" + bucketName + "/" + fileName);
-			blobstoreService.serve(blobKey, resp);
-		} catch (Exception ex) {
-			log.warning(ex.getMessage());
-		}
-	}*/
 }
