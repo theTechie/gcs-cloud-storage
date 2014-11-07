@@ -17,7 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @SuppressWarnings("serial")
 public class FileUploader extends HttpServlet {
 	private final Logger log = Logger.getLogger(FileUploader.class.getName());
-
+	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -42,6 +42,14 @@ public class FileUploader extends HttpServlet {
 					while ((len = (stream.read(buffer, 0, buffer.length))) != -1) {
 						output.write(buffer, 0, len);
 					}
+					
+					int fileSize = output.toByteArray().length;
+					
+					// If fileSize <= 100 KB, Store in MemCache
+					if (fileSize <= MemCacheHelper.CACHE_FILE_MAX_SIZE) {
+						// Upload to MemCache for faster retrieval
+						MemCacheHelper.put(item.getName(), output.toByteArray());
+					} 
 					
 					// Upload to GCS using GcsService
 					GoogleCloudStorageHelper.insertFile(item.getName(),
