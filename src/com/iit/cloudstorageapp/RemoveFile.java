@@ -42,8 +42,8 @@ public class RemoveFile extends HttpServlet {
 				log.info("File Deleted Successfully: " + file);
 			} else {
 				res.getOutputStream().print(
-						"<b> File Not Deleted : " + file + "</b>");
-				log.info("File Not Deleted: " + file);
+						"<b> File found but NOT deleted due to some problem : " + file + "</b>");
+				log.info("File found but NOT deleted due to some problem: " + file);
 			}
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());

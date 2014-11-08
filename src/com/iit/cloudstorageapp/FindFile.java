@@ -34,7 +34,7 @@ public class FindFile extends HttpServlet {
 				
 				res.getOutputStream().write(output);
 			} else {
-				log.warning("File Not Found in MemCache nor GCS : " + file);
+				log.warning("File Not Found : " + file);
 			}
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());

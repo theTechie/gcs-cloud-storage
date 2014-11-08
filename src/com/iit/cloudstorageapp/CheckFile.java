@@ -31,7 +31,7 @@ public class CheckFile extends HttpServlet {
 					log.info("File Found in GCS: " + file);
 			} else {
 					res.getOutputStream().print(
-							"<b> File Not Found in MemCache nor GCS : " + file + "</b>");
+							"<b> File Not Found : " + file + "</b>");
 					log.info("File Not Found in MemCache nor GCS: " + file);
 			}						
 		} catch (Exception ex) {

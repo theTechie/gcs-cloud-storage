@@ -22,7 +22,6 @@ public class MemCacheHelper {
 		return c.get(key);
 	}
 
-	// returns only the cached key/object pairs
 	public static Map<String, Object> getAll(Collection<String> keys) {
 		return c.getAll(keys);
 	}
