@@ -127,10 +127,11 @@ public class GoogleCloudStorageHelper {
 		return size / 1e6;
 	}
 
-	// Find a filefileList
-	public static void findFile(String fileName, HttpServletResponse res) {
+	// Find a file in storage
+	public static byte[] findFile(String fileName, HttpServletResponse res) {
 		byte[] buffer = new byte[8192];
 		ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 		try {
 			GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
@@ -145,17 +146,16 @@ public class GoogleCloudStorageHelper {
 			res.setHeader("Content-disposition", "attachment; filename="
 					+ fileName);
 
-			int len;
-			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			int len;			
 			while ((len = inputChannel.read(byteBuffer)) != -1) {
 				output.write(byteBuffer.array(), 0, len);
 				byteBuffer.clear();
 			}
 
-			res.getOutputStream().write(output.toByteArray());
-
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 		}
+		
+		return output.toByteArray();
 	}
 }

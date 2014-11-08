@@ -8,7 +8,7 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 public class MemCacheHelper {
-	public static final int CACHE_FILE_MAX_SIZE = 100000; // 100 KB
+	public static final int CACHE_FILE_MAX_SIZE = 102400; // 100 KB
 	
 	private static MemcacheService c = MemcacheServiceFactory
 			.getMemcacheService();
