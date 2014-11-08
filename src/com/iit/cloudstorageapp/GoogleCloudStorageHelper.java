@@ -23,7 +23,7 @@ public class GoogleCloudStorageHelper {
 	private final static Logger log = Logger.getLogger(FileUploader.class
 			.getName());
 	private static GcsService gcsService = GcsServiceFactory.createGcsService();
-	private final static String bucketName = "cs553-data-bucket";
+	public final static String bucketName = "cs553-data-bucket";
 
 	// Insert new one or many files on GCS
 	public static void insertFile(String fileName, String contentType,
@@ -128,6 +128,29 @@ public class GoogleCloudStorageHelper {
 		size = size / 1024000.0;		
 		return (double) Math.round(size * 1000) / 1000;
 	}
+	
+	// Find a file in storage
+		public static byte[] findFile(String fileName) {
+			byte[] buffer = new byte[8192];
+			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+			try {
+				GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
+				GcsInputChannel inputChannel = gcsService.openReadChannel(
+						gcsFileName, 0);
+				
+				int len;
+				while ((len = inputChannel.read(byteBuffer)) != -1) {
+					output.write(byteBuffer.array(), 0, len);
+					byteBuffer.clear();
+				}
+			} catch (Exception ex) {
+				log.warning(ex.getMessage());
+			}
+			
+			return output.toByteArray();
+		}
 
 	// Find a file in storage
 	public static byte[] findFile(String fileName, HttpServletResponse res) {

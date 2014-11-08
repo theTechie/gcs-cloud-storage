@@ -2,6 +2,7 @@ package com.iit.cloudstorageapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -9,10 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.Query;
+
 @SuppressWarnings("serial")
 public class RemoveAll extends HttpServlet {
 	private final Logger log = Logger.getLogger(FileUploader.class.getName());
-
+	private DatastoreService datastoreService = DatastoreServiceFactory
+			.getDatastoreService();
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		try {
@@ -28,7 +38,20 @@ public class RemoveAll extends HttpServlet {
 					log.info("Failed to Delete : " + file);
 				}
 			}
+			
 			MemCacheHelper.removeAll(files);
+			
+			Query query = new Query("FileMapper");
+			List<Entity> entities = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
+			ArrayList<Key> keys = new ArrayList<Key>();
+			
+			for (Entity entity : entities) {
+				keys.add(entity.getKey());
+
+				log.info("File: " + entity.getKey().getName());
+			}
+			
+			datastoreService.delete((Key[]) keys.toArray(new Key[keys.size()]));
 			
 			res.getOutputStream().print("Successfully Deleted all files from Storage !");
 		} catch (Exception ex) {
