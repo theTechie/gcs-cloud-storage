@@ -1,6 +1,5 @@
 package com.iit.cloudstorageapp;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -20,6 +19,7 @@ public class FindFile extends HttpServlet {
 			String file = req.getParameter("fileName");
 
 			//res.setContentType("text/html"); //TODO: use octet content-type
+
 			res.setCharacterEncoding("UTF-8");
 
 			if (MemCacheHelper.containsKey(file)) {

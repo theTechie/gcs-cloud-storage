@@ -146,12 +146,11 @@ public class GoogleCloudStorageHelper {
 			res.setHeader("Content-disposition", "attachment; filename="
 					+ fileName);
 
-			int len;			
+			int len;
 			while ((len = inputChannel.read(byteBuffer)) != -1) {
 				output.write(byteBuffer.array(), 0, len);
 				byteBuffer.clear();
 			}
-
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 		}

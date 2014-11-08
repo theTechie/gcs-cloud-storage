@@ -39,7 +39,7 @@
 		<input type="submit" value="View Stats">		
 	</form>
 	<form action="/memCacheRemoveAll" method="get">
-		<input type="submit" value="Remove All MemCache">
+		<input type="submit" value="Clear MemCache">
 	</form>
 	
 	<br />
