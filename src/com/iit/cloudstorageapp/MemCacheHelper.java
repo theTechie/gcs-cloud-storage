@@ -48,6 +48,7 @@ public class MemCacheHelper {
 	}
 	
 	public static double getCacheSizeMB() {
-		return c.getStatistics().getTotalItemBytes() / 1e6;
+		double size = c.getStatistics().getTotalItemBytes() / 1024000.0;
+		return (double) Math.round(size * 1000) / 1000;
 	}
 }

@@ -18,8 +18,6 @@ public class FindFile extends HttpServlet {
 
 			String file = req.getParameter("fileName");
 
-			//res.setContentType("text/html"); //TODO: use octet content-type
-
 			res.setCharacterEncoding("UTF-8");
 
 			if (MemCacheHelper.containsKey(file)) {

@@ -31,7 +31,7 @@ public class GoogleCloudStorageHelper {
 		GcsFilename gcsFileName = new GcsFilename(bucketName, fileName);
 		ByteBuffer src = ByteBuffer.wrap(bytes);
 		GcsFileOptions options = new GcsFileOptions.Builder()
-				.mimeType(contentType) // .addUserMetadata("cs553", "cs553")
+				.mimeType(contentType)
 				.contentEncoding("UTF-8").build();
 
 		if (stream) {
@@ -124,7 +124,9 @@ public class GoogleCloudStorageHelper {
 		} catch (Exception ex) {
 			log.warning(ex.getMessage());
 		}
-		return size / 1e6;
+		
+		size = size / 1024000.0;		
+		return (double) Math.round(size * 1000) / 1000;
 	}
 
 	// Find a file in storage
